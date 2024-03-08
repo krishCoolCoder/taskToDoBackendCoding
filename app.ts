@@ -12,7 +12,7 @@ const port = 3000;
 connectDB();
 
 app.use(authenticationMiddleware);
-app.use("/login",require("./src/loginController/loginController"))
+app.use("/user",require("./src/loginController/loginController"))
 
 app.listen(port, () => {
   return console.log(`Express is listening at http://localhost:${port}`);

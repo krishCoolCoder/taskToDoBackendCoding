@@ -1,8 +1,20 @@
 const express = require('express')
 const app = express()
 
-export function authenticationMiddleware(req, res, next){
+let {cryptoDecode} = require("../utility/utils")
+
+export function authenticationMiddleware(req: any, res: any, next:any){
   console.log('Time:', Date.now())
-  req.headers['test'] = 'testvalue'
+  console.log("The current route is this : ", req.path)
+  if (req.path !== "/user/login"){
+    if (!req.headers.hasOwnProperty("authentication")) {
+      res.status(400).send(
+        {
+          message : "User is not recognized."
+        }
+      )
+    }
+    req.headers['currentUser'] = cryptoDecode(req.headers?.authentication);
+  } 
   next()
 }
