@@ -13,6 +13,7 @@ connectDB();
 
 app.use(authenticationMiddleware);
 app.use("/user",require("./src/loginController/loginController"))
+app.use("/task",require("./src/taskTodo/TaskTodoController"))
 
 app.listen(port, () => {
   return console.log(`Express is listening at http://localhost:${port}`);

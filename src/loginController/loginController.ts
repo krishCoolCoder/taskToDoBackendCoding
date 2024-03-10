@@ -1,4 +1,7 @@
-const bodyParser = require("body-parser");
+// const bodyParser = require("body-parser");
+import bodyParser from "body-parser";
+// import {BodyParser} from "body-parser";
+// let bodyParser = BodyParser;
 
 var router = require("express").Router();
 
@@ -22,7 +25,8 @@ router.post("/login", async function (req: any, res: any) {
             email : req.body.userMail,
             password : req.body.userPassword
         }
-    )
+    ).lean();
+    userData["tokenCreatedAt"] = Date.now();
     console.log("The userData is this : ", userData, " and the query is this : ",{
         email : req.body.userMail,
         password : req.body.userPassword
@@ -32,7 +36,7 @@ router.post("/login", async function (req: any, res: any) {
                 {
                     message:"Successfully logged in.",
                     data : userData,
-                    token : cryptoEncode({...userData, tokenCreatedAt : Date.now()})
+                    token : cryptoEncode(userData)
                 }
                 )
             } else if (userData === null){} 
