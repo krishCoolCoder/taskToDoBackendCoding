@@ -34,7 +34,7 @@ router.post("/createTodo",async function (req : any, res: any){
             todoData : req.body?.todoData,
             todoTeamRef : req.body?.todoTeamRef,
             todoOrganisationRef : req.body.todoOrganisationRef,
-            todoCreatedBy : req.headers?.currentUser?.userId,
+            todoCreatedBy : req.headers?.currentUser?._id,
             todoCreatedAt : Date.now()
         }).save();
         if (todoData) {
@@ -97,7 +97,7 @@ router.patch("/updateTodo",async function (req : any, res: any){
                     todoData : req.body?.todoData,
                     todoTeamRef : req.body?.todoTeamRef,
                     todoOrganisationRef : req.body.todoOrganisationRef,
-                    todoUpdatedBy : req.headers?.currentUser?.userId,
+                    todoUpdatedBy : req.headers?.currentUser?._id,
                     todoUpdatedAt : Date.now()
                 }
         },
